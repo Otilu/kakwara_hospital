@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Kakwara Hospital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #005f73;
+            --primary-light: #e6f4f7;
+            --secondary: #0a9396;
+            --accent: #ee9b00;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --border: #dee2e6;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(rgba(0, 95, 115, 0.9), rgba(0, 95, 115, 0.9)), url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: white;
+            box-shadow: var(--shadow);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info {
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .contact-details h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .contact-details p, .contact-details a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .contact-details a:hover {
+            color: var(--primary);
+        }
+
+        .opening-hours {
+            margin-top: 40px;
+        }
+
+        .opening-hours h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .hours-table {
+            width: 100%;
+        }
+
+        .hours-table tr {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hours-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .hours-table td {
+            padding: 12px 0;
+            color: var(--gray);
+        }
+
+        .hours-table td:last-child {
+            text-align: right;
+            font-weight: 500;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--light);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 95, 115, 0.1);
+            outline: none;
+            background-color: white;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #004a5e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 95, 115, 0.2);
+        }
+
+        /* Map Section */
+        .map-section {
+            margin: 60px 0;
+            height: 500px;
+            background-color: #eee;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .map-overlay {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            max-width: 90%;
+        }
+
+        .map-overlay h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .map-overlay p {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .directions-btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .directions-btn:hover {
+            background-color: #d18a00;
+            transform: translateY(-2px);
+        }
+
+        /* Emergency Banner */
+        .emergency-banner {
+            background-color:#ff7e33;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .emergency-banner .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .emergency-text {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .emergency-text i {
+            font-size: 1.5rem;
+        }
+
+        .emergency-number {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .emergency-btn {
+            background-color: white;
+            color: #bb3e03;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .emergency-btn:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-col p, .footer-col a {
+            color: #adb5bd;
+            margin-bottom: 15px;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-col a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .map-section {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 80px 0;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .emergency-banner .container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .header {
+                padding: 60px 0;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .contact-info, .contact-form {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                
+                <h1>Kakwara Hospital</h1>
+            </div>
+<div class="nav-links">
+    <a href={~p"/main"}>
+        <i class="fa-solid fa-house"></i> Home
+    </a>
+    <a href={~p"/services"}><i class="fa-solid fa-briefcase-medical"></i> Services</a>
+    <a href="#">Doctors</a>
+    <a href={~p"/about"}><i class="fa-solid fa-circle-info"></i> About Us</a>
+    <a href={~p"/contact"}><i class="fa-solid fa-envelope"></i> Contact</a>
+</div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+        <h1>Contact Kakwara Hospital</h1>
+        <p>We're here to help you with all your healthcare needs. Reach out to us through any of the following channels</p>
+    </header>
+
+    <!-- Emergency Banner -->
+    <section class="emergency-banner">
+        <div class="container">
+            <div class="emergency-text">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <div>For medical emergencies, please call:</div>
+                    <div class="emergency-number">911 or (254) 712-345-678</div>
+                </div>
+            </div>
+            <a href="#" class="emergency-btn">Emergency Information</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="section-title">
+            <h2>Get In Touch</h2>
+            <p>Our team is available to answer your questions and assist with appointments</p>
+        </div>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <!-- General Contact -->
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>General Inquiries</h3>
+                        <a href="tel:+254712345678">(254) 712-345-678</a>
+                        <p>Monday - Friday: 7:00 AM - 7:00 PM</p>
+                        <p>Saturday: 8:00 AM - 4:00 PM</p>
+                    </div>
+                </div>
+                
+                <!-- Email Contact -->
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>Email Us</h3>
+                        <a href="mailto:info@kakwarahospital.com">info@kakwarahospital.com</a>
+                        <a href="mailto:appointments@kakwarahospital.com">appointments@kakwarahospital.com</a>
+                        <p>We typically respond within 24 hours</p>
+                    </div>
+                </div>
+                
+                <!-- Address -->
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>Visit Us</h3>
+                        <p>123 Medical Drive</p>
+                        <p>Nairobi, Kenya</p>
+                        <p>P.O. Box 12345-00100</p>
+                    </div>
+                </div>
+                
+                <!-- Opening Hours -->
+                <div class="opening-hours">
+                    <h3>Hospital Hours</h3>
+                    <table class="hours-table">
+                        <tr>
+                            <td>Monday - Friday</td>
+                            <td>7:00 AM - 9:00 PM</td>
+                        </tr>
+                        <tr>
+                            <td>Saturday</td>
+                            <td>8:00 AM - 6:00 PM</td>
+                        </tr>
+                        <tr>
+                            <td>Sunday</td>
+                            <td>9:00 AM - 4:00 PM</td>
+                        </tr>
+                        <tr>
+                            <td>Emergency</td>
+                            <td>24/7</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" class="form-control" required>
+                            <option value="" disabled selected>Select a subject</option>
+                            <option value="appointment">Appointment Request</option>
+                            <option value="billing">Billing Inquiry</option>
+                            <option value="feedback">Feedback/Suggestion</option>
+                            <option value="medical">Medical Records</option>
+                            <option value="other">Other Inquiry</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="map-container">
+            <!-- Embedded Google Map -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.808477395885!2d36.82154831475399!3d-1.2923858359807724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d664b6e0e1%3A0x9e5e3c9b3a8f7e0d!2sNairobi%20Hospital!5e0!3m2!1sen!2ske!4v1620000000000!5m2!1sen!2ske" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <div class="map-overlay">
+            <h3>Kakwara Hospital Main Campus</h3>
+            <p>123 Medical Drive, Nairobi, Kenya</p>
+            <a href="https://maps.google.com" class="directions-btn" target="_blank">
+                <i class="fas fa-directions"></i> Get Directions
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Kakwara Hospital</h3>
+                <p>Providing exceptional healthcare services with compassion and cutting-edge technology since 1985.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <a href="#">Find a Doctor</a>
+                <a href="#">Patient Portal</a>
+                <a href="#">Appointments</a>
+                <a href="#">Visiting Hours</a>
+                <a href="#">Billing & Insurance</a>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Services</h3>
+                <a href="#">Emergency Care</a>
+                <a href="#">Surgical Services</a>
+                <a href="#">Diagnostic Imaging</a>
+                <a href="#">Laboratory Services</a>
+                <a href="#">Rehabilitation</a>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Medical Drive, Nairobi, Kenya</p>
+                <p><i class="fas fa-phone"></i> (254) 712-345-678</p>
+                <p><i class="fas fa-envelope"></i> info@kakwarahospital.com</p>
+                <p><i class="fas fa-clock"></i> Open 24/7</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 Kakwara Hospital. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

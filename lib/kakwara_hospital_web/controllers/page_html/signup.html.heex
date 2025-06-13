@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Signup | MedCare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== Base Styles ===== */
+        :root {
+            --primary: #005b96;
+            --primary-light: #e3eaf6;
+            --primary-dark: #003f6b;
+            --accent: #ff7e33;
+            --accent-light: #ffefe6;
+            --success: #28a745;
+            --error: #dc3545;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-500: #adb5bd;
+            --gray-700: #495057;
+            --white: #ffffff;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-700);
+            background-color: var(--gray-100);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ===== Layout ===== */
+        .auth-container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            box-shadow: var(--shadow-md);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .auth-hero {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-form-container {
+            flex: 1;
+            background: var(--white);
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== Hero Section ===== */
+        .auth-hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .auth-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .hero-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .hero-features {
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon {
+            background: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* ===== Form Styles ===== */
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-header h1 {
+            color: var(--primary);
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            color: var(--gray-500);
+        }
+
+        .form-divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: var(--gray-500);
+            font-size: 0.875rem;
+        }
+
+        .form-divider::before,
+        .form-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--gray-200);
+        }
+
+        .form-divider::before {
+            margin-right: 1rem;
+        }
+
+        .form-divider::after {
+            margin-left: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--gray-500);
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-500);
+        }
+
+        .input-with-icon .form-control {
+            padding-left: 3rem;
+        }
+
+        .validation-message {
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .valid {
+            color: var(--success);
+        }
+
+        .invalid {
+            color: var(--error);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-group input {
+            margin-top: 0.25rem;
+        }
+
+        .checkbox-group label {
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
+
+        .checkbox-group a {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        /* ===== Buttons ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-google {
+            background-color: var(--white);
+            color: var(--gray-700);
+            border: 1px solid var(--gray-200);
+        }
+
+        .btn-google:hover {
+            background-color: var(--gray-100);
+        }
+
+        .btn-icon {
+            margin-right: 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        /* ===== Progress Steps ===== */
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gray-200);
+            z-index: 1;
+        }
+
+        .step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gray-200);
+            color: var(--gray-500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            font-weight: 600;
+        }
+
+        .step.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .step.completed {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .step-label {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* ===== Form Steps ===== */
+        .form-step {
+            display: none;
+            flex: 1;
+            flex-direction: column;
+        }
+
+        .form-step.active {
+            display: flex;
+        }
+
+        /* ===== Navigation ===== */
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 2rem;
+        }
+
+        .btn-back {
+            background: none;
+            border: 1px solid var(--gray-200);
+            color: var(--gray-700);
+        }
+
+        .btn-back:hover {
+            background: var(--gray-100);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .auth-container {
+                flex-direction: column;
+                max-width: 100%;
+                border-radius: 0;
+            }
+
+            .auth-hero {
+                padding: 2rem;
+                text-align: center;
+            }
+
+            .auth-form-container {
+                padding: 2rem;
+            }
+
+            .feature-item {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <!-- Hero Section -->
+        <div class="auth-hero">
+            <div class="logo">
+                <i class="fas fa-hospital"></i>
+                <span>Kakwara Hospital</span>
+            </div>
+            
+            <div class="hero-content">
+                <h2>Join Our Healthcare Community</h2>
+                <p>Create your account to access personalized medical services, appointment scheduling, and health records.</p>
+            </div>
+            
+            <div class="hero-features">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div>
+                        <h4>Easy Appointments</h4>
+                        <p>Book with specialists in minutes</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-medical"></i>
+                    </div>
+                    <div>
+                        <h4>Health Records</h4>
+                        <p>Access your medical history anytime</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div>
+                        <h4>24/7 Support</h4>
+                        <p>Chat with healthcare professionals</p>
+                    </div>
+                </div>
+            </div>
+            <a href={~p"/main"} 
+   style="
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      background:transparent;
+      color: #fff;
+      padding: 0.6rem 1.3rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: background 0.2s;
+   ">
+   <i class="fa-solid fa-house"></i> Home
+</a>
+        </div>
+
+        <!-- Form Section -->
+        <div class="auth-form-container">
+            <div class="form-header">
+                <h1>Create Account</h1>
+                <p>Already have an account? <a href= {~p"/login"} style="color: var(--primary);">Sign in</a></p>
+            </div>
+
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="step active" data-step="1">
+                    <span>1</span>
+                    <span class="step-label">Personal Info</span>
+                </div>
+                <div class="step" data-step="2">
+                    <span>2</span>
+                    <span class="step-label">Account Details</span>
+                </div>
+                <div class="step" data-step="3">
+                    <span>3</span>
+                    <span class="step-label">Complete</span>
+                </div>
+
+            </div>
+
+            <!-- Multi-step Form -->
+            <form id="signupForm">
+                <!-- Step 1: Personal Information -->
+                <div class="form-step active" data-step="1">
+                    <div class="form-group">
+                        <label for="fullName" class="form-label">Full Name</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" id="fullName" class="form-control" placeholder="John Doe" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="email" id="email" class="form-control" placeholder="your@email.com" required>
+                        </div>
+                        <div class="validation-message">
+                            <i class="fas fa-info-circle"></i>
+                            <span>We'll send a verification code to this email</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-phone input-icon"></i>
+                            <input type="tel" id="phone" class="form-control" placeholder="+1 (555) 123-4567" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dob" class="form-label">Date of Birth</label>
+                        <input type="date" id="dob" class="form-control" required>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-back" disabled>
+                            <i class="fas fa-arrow-left btn-icon"></i> Back
+                        </button>
+                        <button type="button" class="btn btn-primary next-step">
+                            Continue <i class="fas fa-arrow-right btn-icon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Account Details -->
+                <div class="form-step" data-step="2">
+                    <div class="form-group">
+                        <label for="username" class="form-label">Username</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-at input-icon"></i>
+                            <input type="text" id="username" class="form-control" placeholder="johndoe" required>
+                        </div>
+                        <div class="validation-message valid">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Username available</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                            <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                        </div>
+                        <div class="validation-message">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Minimum 8 characters with numbers and symbols</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="confirmPassword" class="form-control" placeholder="••••••••" required>
+                        </div>
+                        <div class="validation-message invalid">
+                            <i class="fas fa-times-circle"></i>
+                            <span>Passwords don't match</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="securityQuestion" class="form-label">Security Question</label>
+                        <select id="securityQuestion" class="form-control" required>
+                            <option value="" disabled selected>Select a question</option>
+                            <option value="pet">What was your first pet's name?</option>
+                            <option value="school">What elementary school did you attend?</option>
+                            <option value="city">In what city were you born?</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="securityAnswer" class="form-label">Answer</label>
+                        <input type="text" id="securityAnswer" class="form-control" required>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-back prev-step">
+                            <i class="fas fa-arrow-left btn-icon"></i> Back
+                        </button>
+                        <button type="button" class="btn btn-primary next-step">
+                            Continue <i class="fas fa-arrow-right btn-icon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Complete Registration -->
+                <div class="form-step" data-step="3">
+                    <div class="form-group">
+                        <div style="text-align: center; margin-bottom: 2rem;">
+                            <i class="fas fa-check-circle" style="font-size: 4rem; color: var(--success); margin-bottom: 1rem;"></i>
+                            <h2 style="color: var(--success);">Almost Done!</h2>
+                            <p>Review your information before submitting</p>
+                        </div>
+
+                        <div style="background: var(--gray-100); padding: 1.5rem; border-radius: var(--border-radius); margin-bottom: 1.5rem;">
+                            <h4 style="margin-bottom: 1rem; color: var(--primary);">Personal Information</h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                                <div>
+                                    <p style="font-size: 0.875rem; color: var(--gray-500);">Full Name</p>
+                                    <p id="review-name">John Doe</p>
+                                </div>
+                                <div>
+                                    <p style="font-size: 0.875rem; color: var(--gray-500);">Email</p>
+                                    <p id="review-email">john@example.com</p>
+                                </div>
+                                <div>
+                                    <p style="font-size: 0.875rem; color: var(--gray-500);">Phone</p>
+                                    <p id="review-phone">+1 (555) 123-4567</p>
+                                </div>
+                                <div>
+                                    <p style="font-size: 0.875rem; color: var(--gray-500);">Date of Birth</p>
+                                    <p id="review-dob">01/15/1985</p>
+                                </div>
+                            </div>
+
+                            <h4 style="margin-bottom: 1rem; color: var(--primary);">Account Details</h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div>
+                                    <p style="font-size: 0.875rem; color: var(--gray-500);">Username</p>
+                                    <p id="review-username">johndoe</p>
+                                </div>
+                                <div>
+                                    <p style="font-size: 0.875rem; color: var(--gray-500);">Security Question</p>
+                                    <p id="review-question">What was your first pet's name?</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="terms" required>
+                            <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>, and consent to electronic communications.</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="newsletter">
+                            <label for="newsletter">Subscribe to our newsletter for health tips and updates (optional)</label>
+                        </div>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-back prev-step">
+                            <i class="fas fa-arrow-left btn-icon"></i> Back
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            Complete Registration <i class="fas fa-check btn-icon"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        // Form Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const steps = document.querySelectorAll('.step');
+            const formSteps = document.querySelectorAll('.form-step');
+            const nextButtons = document.querySelectorAll('.next-step');
+            const prevButtons = document.querySelectorAll('.prev-step');
+            const passwordToggle = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            
+            // Password toggle
+            passwordToggle.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.classList.toggle('fa-eye-slash');
+            });
+            
+            // Next step button
+            nextButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const currentStep = document.querySelector('.form-step.active');
+                    const currentStepNumber = parseInt(currentStep.dataset.step);
+                    const nextStepNumber = currentStepNumber + 1;
+                    
+                    // Validate current step before proceeding
+                    if (validateStep(currentStepNumber)) {
+                        // Update progress steps
+                        steps.forEach(step => {
+                            if (parseInt(step.dataset.step) === currentStepNumber) {
+                                step.classList.remove('active');
+                                step.classList.add('completed');
+                            } else if (parseInt(step.dataset.step) === nextStepNumber) {
+                                step.classList.add('active');
+                            }
+                        });
+                        
+                        // Show next form step
+                        currentStep.classList.remove('active');
+                        document.querySelector(`.form-step[data-step="${nextStepNumber}"]`).classList.add('active');
+                        
+                        // Update back button state
+                        if (nextStepNumber > 1) {
+                            document.querySelectorAll('.btn-back').forEach(btn => btn.disabled = false);
+                        }
+                    }
+                });
+            });
+            
+            // Previous step button
+            prevButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const currentStep = document.querySelector('.form-step.active');
+                    const currentStepNumber = parseInt(currentStep.dataset.step);
+                    const prevStepNumber = currentStepNumber - 1;
+                    
+                    // Update progress steps
+                    steps.forEach(step => {
+                        if (parseInt(step.dataset.step) === currentStepNumber) {
+                            step.classList.remove('active');
+                        } else if (parseInt(step.dataset.step) === prevStepNumber) {
+                            step.classList.add('active');
+                            step.classList.remove('completed');
+                        }
+                    });
+                    
+                    // Show previous form step
+                    currentStep.classList.remove('active');
+                    document.querySelector(`.form-step[data-step="${prevStepNumber}"]`).classList.add('active');
+                    
+                    // Update back button state
+                    if (prevStepNumber === 1) {
+                        document.querySelectorAll('.btn-back').forEach(btn => btn.disabled = true);
+                    }
+                });
+            });
+            
+            // Form submission
+            document.getElementById('signupForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Simulate form submission
+                setTimeout(() => {
+                    alert('Account created successfully! Redirecting to dashboard...');
+                    // In a real app, you would redirect here
+                    // window.location.href = '/dashboard';
+                }, 1000);
+            });
+            
+            // Validation function
+            function validateStep(stepNumber) {
+                let isValid = true;
+                
+                if (stepNumber === 1) {
+                    const fullName = document.getElementById('fullName').value;
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    const dob = document.getElementById('dob').value;
+                    
+                    if (!fullName || !email || !phone || !dob) {
+                        alert('Please fill in all required fields');
+                        isValid = false;
+                    }
+                } else if (stepNumber === 2) {
+                    const password = document.getElementById('password').value;
+                    const confirmPassword = document.getElementById('confirmPassword').value;
+                    
+                    if (password !== confirmPassword) {
+                        alert('Passwords do not match');
+                        isValid = false;
+                    } else if (password.length < 8) {
+                        alert('Password must be at least 8 characters');
+                        isValid = false;
+                    }
+                }
+                
+                return isValid;
+            }
+        });
+    </script>
+</body>
+</html>

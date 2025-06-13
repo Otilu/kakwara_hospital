@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kakwara Hospital - Secure Sign In</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0078D4;
+            --secondary: #005a9e;
+            --accent: #ee9b00;
+            --error: #bb3e03;
+            --success: #4bb543;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--dark);
+        }
+        
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        .left-panel {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(0, 120, 212, 0.9), rgba(0, 90, 158, 0.9));
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 15px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .welcome-message h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        .welcome-message p {
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .features {
+            list-style: none;
+        }
+        
+        .features li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .features i {
+            margin-right: 10px;
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+        
+        .right-panel {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .auth-header h2 {
+            color: var(--primary);
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .auth-header p {
+            color: var(--gray);
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ddd;
+            justify-content: center;
+        }
+        
+        .tab {
+            padding: 10px 25px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .tab.active {
+            color: var(--primary);
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .auth-form {
+            flex: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.2);
+            outline: none;
+        }
+        
+        .password-container {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 8px;
+            accent-color: var(--primary);
+        }
+        
+        .forgot-password {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 90, 158, 0.3);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .divider::before {
+            margin-right: 15px;
+        }
+        
+        .divider::after {
+            margin-left: 15px;
+        }
+        
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .google {
+            background-color: #DB4437;
+        }
+        
+        .microsoft {
+            background-color: #0078D4;
+        }
+        
+        .apple {
+            background-color: #000000;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .register-link {
+            text-align: center;
+            margin-top: auto;
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        .register-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .security-info {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+        
+        .security-info i {
+            color: var(--accent);
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        
+        /* OTP Verification */
+        .otp-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .otp-input {
+            width: 50px;
+            height: 60px;
+            text-align: center;
+            font-size: 24px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .otp-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.2);
+        }
+        
+        .resend-otp {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .resend-otp a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        /* Home button */
+        .home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+            background-color: var(--primary);
+            color: #fff;
+            padding: 0.6rem 1.3rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        
+        .home-btn:hover {
+            background-color: var(--secondary);
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                width: 95%;
+                max-width: 500px;
+            }
+            
+            .left-panel {
+                padding: 30px;
+                text-align: center;
+            }
+            
+            .right-panel {
+                padding: 30px 25px;
+            }
+            
+            .logo {
+                justify-content: center;
+            }
+            
+            .features li {
+                justify-content: center;
+            }
+            
+            .otp-input {
+                width: 40px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .tabs {
+                justify-content: space-around;
+            }
+            
+            .tab {
+                padding: 10px 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .left-panel {
+                display: none;
+            }
+            
+            .right-panel {
+                padding: 25px 20px;
+            }
+            
+            .auth-header h2 {
+                font-size: 24px;
+            }
+            
+            .tab {
+                padding: 8px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .otp-input {
+                width: 35px;
+                height: 45px;
+                font-size: 18px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .auth-form {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        /* Error states */
+        .error {
+            color: var(--error);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .form-group.error .form-control {
+            border-color: var(--error);
+        }
+        
+        .form-group.error .error {
+            display: block;
+        }
+        
+        /* Success states */
+        .success {
+            color: var(--success);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .form-group.success .form-control {
+            border-color: var(--success);
+        }
+        
+        .form-group.success .success {
+            display: block;
+        }
+        
+        /* Loading state */
+        .btn-loading {
+            position: relative;
+            pointer-events: none;
+        }
+        
+        .btn-loading::after {
+            content: "";
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            border: 3px solid transparent;
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: button-loading-spinner 1s ease infinite;
+        }
+        
+        @keyframes button-loading-spinner {
+            from {
+                transform: rotate(0turn);
+            }
+            to {
+                transform: rotate(1turn);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div>
+                <div class="logo">
+                   
+                    <h1>Kakwara Hospital</h1>
+                </div>
+                <div class="welcome-message">
+                    <h2>Secure Patient Portal</h2>
+                    <p>Access your medical records, schedule appointments, and communicate with your healthcare providers through our encrypted platform.</p>
+                </div>
+            </div>
+            <ul class="features">
+                <li><i class="fas fa-shield-alt"></i> HIPAA Compliant Security</li>
+                <li><i class="fas fa-lock"></i> End-to-End Encryption</li>
+                <li><i class="fas fa-history"></i> Access Your Medical History</li>
+                <li><i class="fas fa-calendar-check"></i> Schedule Appointments Online</li>
+                <li><i class="fas fa-comments"></i> Secure Messaging with Providers</li>
+            </ul>
+            <a href="/main" class="home-btn">
+                <i class="fa-solid fa-house"></i> Home
+            </a>
+        </div>
+        <div class="right-panel">
+            <div class="auth-header">
+                <h2>Sign In to Your Account</h2>
+                <p>Secure access to your healthcare information</p>
+            </div>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="patient">Patient</div>
+                <div class="tab" data-tab="provider">Provider</div>
+                <div class="tab" data-tab="admin">Admin</div>
+            </div>
+            
+            <div class="auth-form" id="patient-form">
+                <form id="patient-login-form">
+                    <div class="form-group">
+                        <label for="patient-email">Email Address</label>
+                        <input type="email" id="patient-email" name="email" class="form-control" placeholder="your.email@example.com" required>
+                        <div class="error">Please enter a valid email address</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="patient-password">Password</label>
+                        <div class="password-container">
+                            <input type="password" id="patient-password" name="password" class="form-control" placeholder="Enter your password" required>
+                            <i class="fas fa-eye toggle-password"></i>
+                        </div>
+                        <div class="error">Password must be at least 8 characters</div>
+                    </div>
+                    <div class="row">
+                        <div class="remember-me">
+                            <input type="checkbox" id="patient-remember" name="remember">
+                            <label for="patient-remember">Remember me</label>
+                        </div>
+                        <a href="#" class="forgot-password">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="patient-signin-btn">
+                        <i class="fas fa-sign-in-alt"></i> Sign In
+                    </button>
+                </form>
+                
+                <div class="divider">or continue with</div>
+                
+                <div class="social-login">
+                    <div class="social-btn google">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <div class="social-btn microsoft">
+                        <i class="fab fa-microsoft"></i>
+                    </div>
+                    <div class="social-btn apple">
+                        <i class="fab fa-apple"></i>
+                    </div>
+                </div>
+                
+                <div class="register-link">
+                    Don't have an account? <a href="/register">Register here</a>
+                </div>
+            </div>
+            
+            <div class="auth-form" id="provider-form" style="display: none;">
+                <form id="provider-login-form">
+                    <div class="form-group">
+                        <label for="provider-id">Provider ID</label>
+                        <input type="text" id="provider-id" name="provider_id" class="form-control" placeholder="Enter your provider ID" required>
+                        <div class="error">Please enter your provider ID</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="provider-password">Password</label>
+                        <div class="password-container">
+                            <input type="password" id="provider-password" name="password" class="form-control" placeholder="Enter your password" required>
+                            <i class="fas fa-eye toggle-password"></i>
+                        </div>
+                        <div class="error">Password must be at least 8 characters</div>
+                    </div>
+                    <div class="row">
+                        <div class="remember-me">
+                            <input type="checkbox" id="provider-remember" name="remember">
+                            <label for="provider-remember">Remember me</label>
+                        </div>
+                        <a href="#" class="forgot-password">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="provider-signin-btn">
+                        <i class="fas fa-sign-in-alt"></i> Sign In
+                    </button>
+                </form>
+                
+                <div class="security-info">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>For security reasons, provider accounts have additional verification steps</span>
+                </div>
+            </div>
+            
+            <div class="auth-form" id="admin-form" style="display: none;">
+                <form id="admin-login-form" method="post" action="/login">
+                    <div class="form-group">
+                        <label for="admin-email">Admin Email</label>
+                        <input type="email" id="admin-email" name="email" class="form-control" placeholder="admin@kakwarahospital.org" required>
+                        <div class="error">Please enter a valid admin email</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-password">Password</label>
+                        <div class="password-container">
+                            <input type="password" id="admin-password" name="password" class="form-control" placeholder="Enter your password" required>
+                            <i class="fas fa-eye toggle-password"></i>
+                        </div>
+                        <div class="error">Password must be at least 12 characters</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-2fa">Two-Factor Code</label>
+                        <input type="text" id="admin-2fa" name="2fa_code" class="form-control" placeholder="Enter 6-digit code" required>
+                        <div class="error">Please enter a valid 6-digit code</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="admin-signin-btn">
+                        <i class="fas fa-lock"></i> Secure Sign In
+                    </button>
+                </form>
+                
+                <div class="security-info">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Admin access is restricted to authorized personnel only</span>
+                </div>
+            </div>
+            
+            <div class="auth-form" id="otp-form" style="display: none;">
+                <div class="auth-header">
+                    <h2>Two-Factor Authentication</h2>
+                    <p>We've sent a verification code to your registered email and mobile</p>
+                </div>
+                
+                <div class="otp-container">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                </div>
+                
+                <div class="resend-otp">
+                    Didn't receive code? <a href="#">Resend OTP</a> (00:59)
+                </div>
+                
+                <button class="btn btn-primary" id="verify-otp-btn">
+                    <i class="fas fa-check-circle"></i> Verify & Continue
+                </button>
+                
+                <div class="security-info">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>For your security, this code will expire in 10 minutes</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Toggle password visibility
+        const togglePassword = (toggleElement, passwordElement) => {
+            toggleElement.addEventListener('click', function() {
+                const type = passwordElement.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordElement.setAttribute('type', type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+        };
+        
+        // Initialize all password toggles
+        document.querySelectorAll('.toggle-password').forEach(toggle => {
+            const passwordInput = toggle.previousElementSibling;
+            togglePassword(toggle, passwordInput);
+        });
+        
+        // Tab switching
+        const tabs = document.querySelectorAll('.tab');
+        const forms = {
+            'patient': document.getElementById('patient-form'),
+            'provider': document.getElementById('provider-form'),
+            'admin': document.getElementById('admin-form')
+        };
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabName = this.getAttribute('data-tab');
+                
+                // Remove active from all tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                // Add active to clicked tab
+                this.classList.add('active');
+                // Hide all forms
+                Object.values(forms).forEach(f => f.style.display = 'none');
+                // Show the selected form
+                forms[tabName].style.display = 'block';
+            });
+        });
+        
+        // Form validation (only for patient and provider)
+        const validateForm = (formId, submitBtnId) => {
+            const form = document.getElementById(formId);
+            const submitBtn = document.getElementById(submitBtnId);
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = true;
+                
+                // Clear previous errors
+                this.querySelectorAll('.form-group').forEach(group => {
+                    group.classList.remove('error', 'success');
+                });
+                
+                // Validate each required field
+                this.querySelectorAll('[required]').forEach(field => {
+                    const group = field.closest('.form-group');
+                    
+                    if (!field.value) {
+                        group.classList.add('error');
+                        isValid = false;
+                    } else if (field.type === 'email' && !/^\S+@\S+\.\S+$/.test(field.value)) {
+                        group.classList.add('error');
+                        isValid = false;
+                    } else if (field.type === 'password') {
+                        if (field.value.length < 8) {
+                            group.classList.add('error');
+                            isValid = false;
+                        } else {
+                            group.classList.add('success');
+                        }
+                    } else {
+                        group.classList.add('success');
+                    }
+                });
+                
+                if (isValid) {
+                    // Show loading state
+                    submitBtn.classList.add('btn-loading');
+                    submitBtn.disabled = true;
+                    
+                    // Simulate API call
+                    setTimeout(() => {
+                        submitBtn.classList.remove('btn-loading');
+                        submitBtn.disabled = false;
+                        
+                        // For demo purposes, show OTP form
+                        document.getElementById(formId).style.display = 'none';
+                        document.getElementById('otp-form').style.display = 'block';
+                        
+                        // Auto-focus first OTP input
+                        document.querySelector('.otp-input').focus();
+                    }, 1500);
+                }
+            });
+        };
+        
+        // Initialize form validations
+        validateForm('patient-login-form', 'patient-signin-btn');
+        validateForm('provider-login-form', 'provider-signin-btn');
+        // Removed: validateForm('admin-login-form', 'admin-signin-btn');
+        
+        // OTP input handling
+        const otpInputs = document.querySelectorAll('.otp-input');
+        otpInputs.forEach((input, index) => {
+            // Allow only numbers
+            input.addEventListener('input', function() {
+                this.value = this.value.replace(/[^0-9]/g, '');
+                
+                if (this.value.length === 1) {
+                    if (index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+                }
+            });
+            
+            // Handle backspace
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && this.value.length === 0) {
+                    if (index > 0) {
+                        otpInputs[index - 1].focus();
+                    }
+                }
+            });
+            
+            // Handle paste
+            input.addEventListener('paste', function(e) {
+                e.preventDefault();
+                const pasteData = e.clipboardData.getData('text/plain').replace(/[^0-9]/g, '');
+                
+                if (pasteData.length === 6) {
+                    otpInputs.forEach((otpInput, i) => {
+                        otpInput.value = pasteData[i] || '';
+                    });
+                    otpInputs[5].focus();
+                }
+            });
+        });
+        
+        // Verify OTP button
+        document.getElementById('verify-otp-btn').addEventListener('click', function() {
+            let otpCode = '';
+            otpInputs.forEach(input => {
+                otpCode += input.value;
+            });
+            
+            if (otpCode.length === 6) {
+                this.classList.add('btn-loading');
+                this.disabled = true;
+                
+                // Simulate OTP verification
+                setTimeout(() => {
+                    this.classList.remove('btn-loading');
+                    this.disabled = false;
+                    alert('OTP verified successfully! Redirecting to your dashboard...');
+                    // In a real app: window.location.href = '/dashboard';
+                }, 1500);
+            } else {
+                alert('Please enter a complete 6-digit code');
+            }
+        });
+        
+        // Simulate countdown timer for OTP resend
+        const resendOtpLink = document.querySelector('.resend-otp a');
+        let countdown = 59;
+        
+        const updateCountdown = () => {
+            document.querySelector('.resend-otp').innerHTML = 
+                `Didn't receive code? <a href="#">Resend OTP</a> (00:${countdown < 10 ? '0' + countdown : countdown})`;
+            
+            if (countdown > 0) {
+                countdown--;
+                setTimeout(updateCountdown, 1000);
+            } else {
+                document.querySelector('.resend-otp').innerHTML = 
+                    'Didn\'t receive code? <a href="#" id="resend-otp-link">Resend OTP</a>';
+                
+                document.getElementById('resend-otp-link').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('New OTP code sent to your registered email and phone number');
+                    countdown = 59;
+                    updateCountdown();
+                });
+            }
+        };
+        
+        updateCountdown();
+        
+        // Social login buttons
+        document.querySelectorAll('.social-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const provider = this.classList.contains('google') ? 'Google' : 
+                                this.classList.contains('microsoft') ? 'Microsoft' : 'Apple';
+                alert(`In a real application, this would initiate ${provider} OAuth login`);
+            });
+        });
+        
+        // Forgot password links
+        document.querySelectorAll('.forgot-password').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Password reset link would be sent to your registered email');
+            });
+        });
+        
+        // Register link
+        document.querySelector('.register-link a').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Redirecting to registration page');
+            // In a real app: window.location.href = '/register';
+        });
+        // Admin login handling
+const adminForm = document.getElementById('admin-form');
+if (adminForm) {
+  adminForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const username = adminForm.querySelector('input[name="admin email"]').value.trim();
+    const password = adminForm.querySelector('input[name="password"]').value.trim();
+
+    // Dummy credentials for demo
+    const validAdmin = {
+      username: 'admin@kakwarahospital.org',
+      password: 'your_admin_password'
+    };
+
+    if (username === validAdmin.username && password === validAdmin.password) {
+      // Redirect to profiles page
+      window.location.href = 'profiles.html';
+    } else {
+      alert('Invalid admin credentials');
+    }
+  });
+}
+
+    });
+</script>
+
+</body>
+</html>

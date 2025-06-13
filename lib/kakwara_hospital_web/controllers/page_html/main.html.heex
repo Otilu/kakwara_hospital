@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href={~p"/assets/main.css"}>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+     <title>Kakwara Hospital</title>
+  </head>
+  <body>
+      <!-- Hidden checkbox to control sidebar state -->
+  <input type="checkbox" id="sidebar-toggle">
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <label for="sidebar-toggle" class="menu-btn">
+      <i class="fas fa-bars menu-icon"></i>
+    </label>
+    <h1>Kakwara Hospital</h1>
+  <button id="theme-toggle" class="theme-toggle-btn">
+  <i class="fas fa-moon"></i>
+</button>
+<select id="lang-select" class="lang-select">
+  <option value="en">English</option>
+  <option value="fr">Français</option>
+  <option value="sw">Swahili</option>
+</select>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    
+      <div class="sidebar-item">
+      <a href={~p"/dashboard"}><i class="fa-solid fa-house sidebar-icon"></i> <span class="sidebar-text">Dashboard</span></a>
+    </div>
+     <div class="sidebar-item">
+      <a href={~p"/main"}><i class="fa-solid fa-house sidebar-icon"></i> <span class="sidebar-text">Home</span></a>
+    </div>
+   
+    <div class="sidebar-item"><a href={~p"/signup"}><i class="fa-solid fa-user-plus sidebar-icon"></i> <span class="sidebar-text">Sign Up</span></a></div>
+    <div class="sidebar-item"><a href={~p"/login"}><i class="fa-solid fa-right-to-bracket sidebar-icon"></i> <span class="sidebar-text">Log In</span></a></div>
+    <div class="sidebar-item"><a href={~p"/logout"}><i class="fa-solid fa-right-from-bracket sidebar-icon"></i> <span class="sidebar-text">Log Out</span></a></div>
+    <div class="sidebar-item"><a href={~p"/profile"}><i class="fa-solid fa-user sidebar-icon"></i> <span class="sidebar-text">Profile</span></a></div>
+    <div class="sidebar-item"><a href={~p"/settings"}><i class="fa-solid fa-gear sidebar-icon"></i> <span class="sidebar-text">Settings</span></a></div>
+    <div class="sidebar-item"><a href={~p"/help"}><i class="fa-solid fa-circle-question sidebar-icon"></i> <span class="sidebar-text">Help</span></a></div>
+    <div class="sidebar-item"><a href={~p"/contact"}><i class="fa-solid fa-envelope sidebar-icon"></i> <span class="sidebar-text">Contact</span></a></div>
+    <div class="sidebar-item"><a href={~p"/about"}><i class="fa-solid fa-circle-info sidebar-icon"></i> <span class="sidebar-text">About</span></a></div>
+    <!-- More items... -->
+  </div>
+
+  <!-- Overlay (click to close) <a href={~p"/signup"}><i class="fa-solid fa-user-plus"></i> Get Started</a><a href={~p"/signup"}><i class="fa-solid fa-user-plus"></i> Get Started</a>
+  <label for="sidebar-toggle" class="overlay"></label> -->
+
+  <!-- Main content -->
+  <div class="content">
+    <!-- Your content here -->
+  </div>
+    <!--  <div class="side-solid">
+      <header class="header"><i class="fa-solid fa-hospital"></i>Kakwara Hospital</header>
+      <div class="side">
+        <ul><i class="fa-solid fa-envelope"></i>Email <a href="mailto:Sehathospital@gmail.com">Sehathospital@gmail.com</a></ul>
+        <ul><i class="fa-solid fa-phone"></i>Emergency Call <a href="tel:+254743856988">+254743856988</a></ul>
+      </div>
+    </div>-->
+    <!-- Navigation tools section -->
+    
+    <div class="spoon">
+    <div class="tools">
+      
+  
+      
+
+      <ul><a href={~p"/main"}><i class="fa-solid fa-house"></i> Home</a></ul>
+      <ul><a href={~p"/about"}><i class="fa-solid fa-circle-info"></i> About Us</a></ul>
+      <ul><a href={~p"/contact"}><i class="fa-solid fa-envelope"></i> Contact</a></ul>
+      <ul><a href={~p"/services"}><i class="fa-solid fa-briefcase-medical"></i> Services</a></ul>
+      <ul><a href={~p"/blog"}><i class="fa-solid fa-blog"></i> Blog</a></ul>
+      <ul><a href={~p"/team"}><i class="fa-solid fa-users"></i> Team</a></ul>
+      <ul><a href={~p"/signup"}><i class="fa-solid fa-user-plus"></i> Get Started</a></ul>
+      <ul><a href={~p"/login"}><i class="fa-solid fa-right-to-bracket "></i> Log In</a></ul>
+      <!-- Search bar on far right -->
+       <form class="search-container" action={~p"/search"} method="get">
+  <input type="text" name="query" class="search-input" placeholder="Search..." required />
+  <button type="submit" class="search-btn">
+    <i class="fas fa-search"></i>
+  </button>
+</form>
+    </div>
+    <div class="make">
+      <div class="need">
+         <div class="banner" onclick="window.location.href='services.html'">
+    <h2>Our Healthcare Services</h2>
+    <p>Compassionate, comprehensive care delivered by our team of specialists using cutting-edge medical technology.</p>
+    <a href={~p"/services"} class="cta">
+      More Services
+      <i class="fas fa-arrow-right"></i>
+    </a>
+    <div class="circle-deco"></div>
+    <div class="medical-icon">
+      <i class="fas fa-heartbeat"></i>
+    </div>
+  </div>
+      </div>
+      <div class="image1">
+        <img src={~p"/assets/image2.jpg"} alt="Image 1" width="25%">
+        <div class="text1">
+          <head>OUR SERVICES</head>
+          <h1 class="our">Your Health , Our Priority</h1>
+          <h2>Emergency Call</h2>
+          <div>
+            <i class="fa-solid fa-phone-volume"></i>
+            <span class="type"><a href="tel:+254743856988">+254743856988</a></span>
+          </div>
+          <p>
+            For urgent medical assistance, our emergency team is available 24/7. Call us immediately if you or a loved one needs prompt care or is experiencing a medical emergency.
+          </p>
+          <p>Your health and safety are our top priority.</p>
+          <div class="info-box">
+            <h2>24/7 Emergency Services</h2>
+            <p>
+              Our emergency department is open around the clock to provide immediate care for critical and life-threatening conditions.
+            </p>
+            <p>
+              Our highly trained medical team is always ready to respond quickly and efficiently to any emergency situation, ensuring you receive the best possible care when you need it most.
+            </p>
+               <a href={~p"/contact"} class="cta">
+  Call Us Now
+  <i class="fas fa-arrow-right"></i>
+</a>
+              </div>
+        </div>
+      </div>
+      <section class="root">
+        <div class="container">
+          <h2 class="section-title">Services</h2>
+          <p class="section-subtitle">Delivered by existing services. <span class="highlight">Key cover services.</span></p>
+          <div class="services-grid">
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <h3>Comprehensive Coverage</h3>
+              <p>Tailored solutions for all your needs. Reliable protection with proven results.</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-heartbeat"></i>
+              </div>
+              <h3>Health & Wellness</h3>
+              <p>Expert care for your well-being. Advanced treatments and compassionate support.</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-hands-helping"></i>
+              </div>
+              <h3>Community Support</h3>
+              <p>Engaging with local communities. Empowering individuals through outreach programs.</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <h3>Efficiency & Reliability</h3>
+              <p>Streamlined processes for timely delivery. Trusted by clients nationwide.</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <h3>Expert Team</h3>
+              <p>Dedicated professionals with years of experience. Committed to excellence in service.</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-globe"></i>
+              </div>
+              <h3>Global Reach</h3>
+              <p>Connecting with clients worldwide. Expanding our services to meet global demands.</p>
+            </div>
+          </div>
+          <button class="cta-button"><a href={~p"/signup"}><i class="fa-solid fa-user-plus"></i> Get Started</a></button>
+        </div>
+      </section>
+    </div>
+
+    <div class="info image3-row">
+      <div class="left-col">
+        <div class="info-top-text">
+          <h1>Our Services</h1>
+          <p>World-Class Healthcare</p>
+          <p>Services For You And Your Family</p>
+          <p>Loved Ones</p>
+          <a href="#" class="mark-services">MORE SERVICES -></a>  
+        </div>
+        <img src={~p"/assets/image3.jpg"} alt="Image 3" width="300">
+        <p class="info-bottom-text">Ensuring Wellness with Excellence, Compassion and Innovation</p>
+      </div>
+      <div class="services-container">
+        <div class="info-bot">
+        <div class="services-gridy">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fa-solid fa-building-circle-arrow-right"></i>
+            </div>
+            <h3>Birthing Center</h3>
+            <p>Tailored solutions for all your needs. Reliable protection with proven results.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fa-solid fa-pills"></i>
+            </div>
+            <h3>Cancer Center</h3>
+            <p>Expert care for your well-being. Advanced treatments and compassionate support.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fa-solid fa-heart-circle-check"></i>
+            </div>
+            <h3>Heart Care</h3>
+            <p>Dedicated professionals with years of experience. Committed to excellence in service.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fa-solid fa-syringe"></i>
+            </div>
+            <h3>Vaccine</h3>
+            <p>Connecting with clients worldwide. Expanding our services to meet global demands.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fa-solid fa-stethoscope"></i>
+            </div>
+            <h3>Orthopedics</h3>
+            <p>Connecting with clients worldwide. Expanding our services to meet global demands.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fa-solid fa-tooth"></i>
+            </div>
+            <h3>Dental Clinic</h3>
+            <p>Connecting with clients worldwide. Expanding our services to meet global demands.</p>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <i class="fa-solid fa-hospital"></i>
+          <span>Kakwara Hospital</span>
+        </div>
+        <div class="footer-links">
+          <div class="footer-section">
+            <h2>Company</h2>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h2>Products</h2>
+            <ul>
+              <li><a href="#">Online Consultation</a></li>
+              <li><a href="#">Pharmacy Delivery</a></li>
+              <li><a href="#">Health Check Packages</a></li>
+              <li><a href="#">Telemedicine App</a></li>
+              <li><a href="#">Wellness Programs</a></li>
+              <li><a href="#">Vaccination Booking</a></li>
+              <li><a href="#">Lab Test Booking</a></li>
+              <li><a href="#">Patient Portal</a></li>
+              <li><a href="#">Insurance Assistance</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h2>Contact</h2>
+            <ul>
+              <li><a href="mailto:Sehathospital@gmail.com"><i class="fa-solid fa-envelope"></i> Email Us</a></li>
+              <li><a href="tel:+254743856988"><i class="fa-solid fa-phone"></i> Call Us</a></li>
+              <li><a href="#"><i class="fa-solid fa-location-dot"></i> Visit Us</a></li>
+            </ul>
+            <div class="footer-social">
+              <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+              <a href="#"><i class="fa-brands fa-facebook"></i></a>
+              <a href="#"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="#"><i class="fa-brands fa-youtube"></i></a>
+              <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Kakwara Hospital. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Side menu JS -->
+    <script>
+      const menuBtn = document.getElementById('menuBtn');
+      const sideMenu = document.getElementById('sideMenu');
+      const closeMenu = document.getElementById('closeMenu');
+
+      menuBtn.onclick = () => sideMenu.classList.add('open');
+      closeMenu.onclick = () => sideMenu.classList.remove('open');
+      window.onclick = (e) => {
+        if (sideMenu.classList.contains('open') && !sideMenu.contains(e.target) && e.target !== menuBtn) {
+          sideMenu.classList.remove('open');
+        }
+      };
+    </script>
+    </div>
+    <div class="back-to-top">
+  <i class="fas fa-arrow-up"></i>
+</div>
+
+<div class="loading-spinner">
+  <div class="spinner"></div>
+</div>
+
+<script>
+  // Back to top button
+  const backToTop = document.querySelector('.back-to-top');
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 300);
+  });
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Loading spinner
+  window.addEventListener('load', () => {
+    document.querySelector('.loading-spinner').style.display = 'none';
+  });
+</script>
+  <script>
+    const btn = document.querySelector('.search-btn');
+    const container = document.querySelector('.search-container');
+    const input = document.querySelector('.search-input');
+
+    btn.addEventListener('click', () => {
+      container.classList.toggle('active');
+      if (container.classList.contains('active')) {
+        input.focus();
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!container.contains(e.target)) {
+        container.classList.remove('active');
+      }
+    });
+  </script>
+  <script>
+  const themeToggle = document.getElementById('theme-toggle');
+  const icon = themeToggle.querySelector('i');
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    // Toggle icon
+    if(document.body.classList.contains('dark-mode')) {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    } else {
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+    }
+    // Optional: Save preference
+    localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+  });
+
+  // On load, set theme from localStorage
+  window.addEventListener('DOMContentLoaded', () => {
+    if(localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark-mode');
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
+  });
+</script>
+<script>
+  document.getElementById('lang-select').addEventListener('change', function() {
+    alert('Language changed to: ' + this.value);
+    // You can add logic here to actually change the language
+  });
+</script>
+  </body>
+</html>

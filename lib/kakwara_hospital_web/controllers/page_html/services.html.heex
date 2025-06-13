@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | Kakwara Hospital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #005b96;
+            --primary-light: #e6f4f7;
+            --secondary: #005b96;
+            --accent: #ee9b00;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --border: #dee2e6;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(rgba(0, 95, 115, 0.9), rgba(0, 95, 115, 0.9)), url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: white;
+            box-shadow: var(--shadow);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 1900px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Services Section */
+        .services-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-img img {
+            transform: scale(1.05);
+        }
+
+        .service-content {
+            padding: 25px;
+        }
+
+        .service-content h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .service-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .service-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .service-department {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+
+        .read-more:hover {
+            color: var(--accent);
+        }
+
+        /* Specialized Care Section */
+        .specialized-section {
+            background-color: var(--primary-light);
+            padding: 80px 0;
+        }
+
+        .specialized-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .specialized-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .specialty-card {
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .specialty-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .specialty-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .specialty-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .specialty-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Emergency Services */
+        .emergency-section {
+            background: linear-gradient(rgba(0, 95, 115, 0.9), rgba(0, 95, 115, 0.9)), url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .emergency-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .emergency-container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .emergency-container p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .emergency-btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(238, 155, 0, 0.3);
+        }
+
+        .emergency-btn:hover {
+            background-color: #d18a00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(238, 155, 0, 0.4);
+        }
+
+        .emergency-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-col p, .footer-col a {
+            color: #adb5bd;
+            margin-bottom: 15px;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-col a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 80px 0;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .emergency-number {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .header {
+                padding: 60px 0;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <!--<img src="https://i.imgur.com/JZEyH7m.png" alt="Kakwara Hospital Logo">-->
+                <h1>Kakwara Hospital</h1>
+            </div>
+            <div class="nav-links">
+                <a href={~p"/main"} ><i class="fa-solid fa-home"></i>Home</a>
+                <a href={~p"/services"}><i class="fa-solid fa-briefcase-medical"></i> Services</a>
+                <a href={~p"/team"}><i class="fa-solid fa-users"></i> Doctors</a>
+                <a href={~p"/about"}><i class="fa-solid fa-circle-info"></i> About Us</a>
+                <a href={~p"/contact"}><i class="fa-solid fa-envelope"></i> Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+        <h1>Our Medical Services</h1>
+        <p>Comprehensive healthcare services with cutting-edge technology and compassionate care for all our patients</p>
+    </header>
+
+    <!-- Main Services -->
+    <section class="services-section">
+        <div class="section-title">
+            <h2>Comprehensive Healthcare</h2>
+            <p>We offer a wide range of medical services to meet all your healthcare needs with excellence and compassion</p>
+        </div>
+        
+        <div class="services-grid">
+            <!-- Service 1 -->
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Cardiology">
+                </div>
+                <div class="service-content">
+                    <h3>Cardiology</h3>
+                    <p>Comprehensive heart care including diagnostic tests, interventional procedures, and cardiac rehabilitation programs.</p>
+                    <div class="service-meta">
+                        <span class="service-department">Heart Center</span>
+                        <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 2 -->
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Neurology">
+                </div>
+                <div class="service-content">
+                    <h3>Neurology</h3>
+                    <p>Advanced treatment for disorders of the nervous system including stroke, epilepsy, and neurodegenerative diseases.</p>
+                    <div class="service-meta">
+                        <span class="service-department">Neuroscience</span>
+                        <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 3 -->
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1581595219315-a187dd40c322?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Pediatrics">
+                </div>
+                <div class="service-content">
+                    <h3>Pediatrics</h3>
+                    <p>Specialized care for infants, children, and adolescents with child-friendly facilities and expert pediatricians.</p>
+                    <div class="service-meta">
+                        <span class="service-department">Children's Health</span>
+                        <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 4 -->
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Orthopedics">
+                </div>
+                <div class="service-content">
+                    <h3>Orthopedics</h3>
+                    <p>Treatment for musculoskeletal conditions including joint replacements, sports injuries, and spine disorders.</p>
+                    <div class="service-meta">
+                        <span class="service-department">Bone & Joint</span>
+                        <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 5 -->
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1530026186672-2cd00ffc50fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Oncology">
+                </div>
+                <div class="service-content">
+                    <h3>Oncology</h3>
+                    <p>Comprehensive cancer care including chemotherapy, radiation therapy, and surgical oncology with compassionate support.</p>
+                    <div class="service-meta">
+                        <span class="service-department">Cancer Center</span>
+                        <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 6 -->
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2032&q=80" alt="Maternity">
+                </div>
+                <div class="service-content">
+                    <h3>Maternity Care</h3>
+                    <p>Complete care for expecting mothers including prenatal classes, delivery services, and postnatal support.</p>
+                    <div class="service-meta">
+                        <span class="service-department">Women's Health</span>
+                        <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialized Care -->
+    <section class="specialized-section">
+        <div class="specialized-container">
+            <div class="section-title">
+                <h2>Specialized Care Programs</h2>
+                <p>Our specialized programs provide focused care for complex medical conditions</p>
+            </div>
+            
+            <div class="specialized-grid">
+                <!-- Specialty 1 -->
+                <div class="specialty-card">
+                    <div class="specialty-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Cardiac Rehabilitation</h3>
+                    <p>Supervised program to improve cardiovascular health after heart surgery or cardiac events.</p>
+                </div>
+                
+                <!-- Specialty 2 -->
+                <div class="specialty-card">
+                    <div class="specialty-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Stroke Recovery</h3>
+                    <p>Multidisciplinary approach to help patients regain independence after stroke.</p>
+                </div>
+                
+                <!-- Specialty 3 -->
+                <div class="specialty-card">
+                    <div class="specialty-icon">
+                        <i class="fas fa-wheelchair"></i>
+                    </div>
+                    <h3>Physical Therapy</h3>
+                    <p>Customized rehabilitation programs for injury recovery and mobility improvement.</p>
+                </div>
+                
+                <!-- Specialty 4 -->
+                <div class="specialty-card">
+                    <div class="specialty-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Nutrition Counseling</h3>
+                    <p>Personalized dietary plans for disease management and overall wellness.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Services -->
+    <section class="emergency-section">
+        <div class="emergency-container">
+            <h2>24/7 Emergency Care</h2>
+            <p>Our emergency department is staffed round the clock with experienced specialists ready to handle any medical crisis</p>
+            <a href="#" class="emergency-btn">Emergency Information</a>
+            <div class="emergency-number">
+                <i class="fas fa-phone-alt"></i>
+                <span>Call: 911 or (254) 712-345-678</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Kakwara Hospital</h3>
+                <p>Providing exceptional healthcare services with compassion and cutting-edge technology since 1985.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <a href="#">Find a Doctor</a>
+                <a href="#">Patient Portal</a>
+                <a href="#">Appointments</a>
+                <a href="#">Visiting Hours</a>
+                <a href="#">Billing & Insurance</a>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Services</h3>
+                <a href="#">Emergency Care</a>
+                <a href="#">Surgical Services</a>
+                <a href="#">Diagnostic Imaging</a>
+                <a href="#">Laboratory Services</a>
+                <a href="#">Rehabilitation</a>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Medical Drive, Nairobi, Kenya</p>
+                <p><i class="fas fa-phone"></i> (254) 712-345-678</p>
+                <p><i class="fas fa-envelope"></i> info@kakwarahospital.com</p>
+                <p><i class="fas fa-clock"></i> Open 24/7</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 Kakwara Hospital. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - Kakwara Hospital</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background: #f9fafb;
+      color: #005b96;
+      line-height: 1.6;
+    }
+
+    .header {
+      background: #005b96;
+      color: white;
+      padding: 2.5rem 1rem;
+      text-align: center;
+      animation: fadeInDown 1s ease-in-out;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      margin: 0.5rem 0;
+    }
+
+    .header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .section {
+      padding: 3rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      animation: fadeIn 1s ease-in;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      color: #2563eb;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .mission-vision {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      flex: 1;
+      min-width: 300px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      max-width: 80px;
+      margin-bottom: 1rem;
+    }
+
+    .timeline {
+      list-style: none;
+      padding: 0;
+      border-left: 4px solid #2563eb;
+      position: relative;
+    }
+
+    .timeline li {
+      padding: 1rem 1.5rem;
+      position: relative;
+      background: white;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      animation: fadeInUp 1s ease;
+    }
+
+    .timeline li span {
+      font-weight: bold;
+      color: #2563eb;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-grid {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .feature {
+      flex: 1;
+      min-width: 280px;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .feature i {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #2563eb;
+    }
+
+    .feature:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #005b96;
+      color: #f8fafc;
+    }
+
+    @keyframes fadeInDown {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>Kakwara Hospital</h1>
+    <p>Excellence in Care. Compassion in Service.</p>
+    <a href={~p"/main"} 
+   style="
+   margin-left: auto;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      background: transparent;
+      color: #fff;
+      padding: 0.6rem 1.3rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: background 0.2s;
+   ">
+   <i class="fa-solid fa-house"></i> Home
+</a>
+  </header>
+
+  <section class="section">
+    <h2>About Us</h2>
+    <p style="max-width: 800px; margin: 0 auto; text-align: center;">Kakwara Hospital is a state-of-the-art medical institution providing a wide range of healthcare services. We prioritize patient well-being with top-quality medical staff, modern facilities, and compassionate service.</p>
+  </section>
+
+  <section class="section mission-vision">
+    <div class="card">
+      <img src="https://img.icons8.com/ios-filled/100/4a90e2/hospital-room.png" alt="Mission icon">
+      <h3>Our Mission</h3>
+      <p>Deliver high-quality, patient-centered healthcare with excellence, empathy, and innovation.</p>
+    </div>
+    <div class="card">
+      <img src="https://img.icons8.com/ios-filled/100/4a90e2/stethoscope.png" alt="Vision icon">
+      <h3>Our Vision</h3>
+      <p>To be a regional and global leader in healthcare innovation and compassionate service.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Our Journey</h2>
+    <ul class="timeline">
+      <li><span>2005</span> - Kakwara Hospital was founded with a vision for accessible community healthcare.</li>
+      <li><span>2010</span> - Introduced specialty care units including Pediatrics, Surgery, and Obstetrics.</li>
+      <li><span>2015</span> - ISO certified, and expanded to a 200-bed facility with digital patient records.</li>
+      <li><span>2022</span> - Launched a comprehensive telemedicine platform and modern diagnostics center.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Why Choose Kakwara</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <i class="fas fa-hospital"></i>
+        <h4>Advanced Infrastructure</h4>
+        <p>Modern buildings and specialized departments for all patient needs.</p>
+      </div>
+      <div class="feature">
+        <i class="fas fa-ambulance"></i>
+        <h4>24/7 Emergency</h4>
+        <p>Round-the-clock ambulance and emergency care units ready to respond.</p>
+      </div>
+      <div class="feature">
+        <i class="fas fa-user-md"></i>
+        <h4>Expert Staff</h4>
+        <p>Skilled physicians, nurses, and support teams delivering exceptional care.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 Kakwara Hospital. All rights reserved.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kakwara Hospital Blog</title>
+<style>
+  /* Font */
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    background: #f4f7fb;
+    color: #222;
+    line-height: 1.65;
+  }
+  a {
+    color: #0091ea;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+
+
+
+  
+  .container {
+    position: sticky;
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  } 
+
+  /* Header */
+  header {
+    background-color: #003f6b;
+    color: white;
+    padding: 1rem 0;
+    box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+  }
+  header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  header h1 {
+    margin: 0;
+    font-weight: 900;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+  }
+  header nav a {
+    margin-left: 1.8rem;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #e3f2fd;
+    transition: color 0.3s ease;
+  }
+  header nav a:hover {
+    color: #82b1ff;
+  }
+  /* Logo placeholder */
+  .logo {
+    font-weight: 900;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    color: #82b1ff;
+    font-style: italic;
+  }
+
+  /* Blog layout */
+  main.blog-layout {
+    display: flex;
+    gap: 2.5rem;
+    padding: 2.5rem 0 4rem;
+  }
+
+  /* Posts section */
+  section.posts {
+    flex: 3;
+  }
+  /* Article base */
+  article.post {
+    background: white;
+    margin-bottom: 2.8rem;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 2rem;
+    transition: transform 0.25s ease;
+  }
+  article.post:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.15);
+  }
+  article.post img {
+    width: 100%;
+    max-height: 320px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1.4rem;
+  }
+  article.post h2 {
+    color: #003f6b;
+    margin: 0 0 0.5rem;
+    font-size: 2.1rem;
+    line-height: 1.2;
+  }
+  article.post .meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  article.post p.excerpt {
+    font-size: 1.15rem;
+    color: #444;
+  }
+  article.post a.read-more {
+    margin-top: 1.2rem;
+    display: inline-block;
+    font-weight: 700;
+    color: #0077cc;
+    font-size: 1.05rem;
+    transition: color 0.3s ease;
+  }
+  article.post a.read-more:hover {
+    color: #003f6b;
+  }
+
+  /* Featured post */
+  article.featured-post {
+    background: linear-gradient(135deg, #003f6b, #00509e);
+    color: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    padding: 3rem;
+  }
+  article.featured-post h2 {
+    color: #e3f2fd;
+  }
+  article.featured-post p.excerpt {
+    font-size: 1.3rem;
+    color: #bbdefb;
+  }
+  article.featured-post a.read-more {
+    color: #bbdefb;
+    font-weight: 800;
+  }
+  article.featured-post a.read-more:hover {
+    color: #e3f2fd;
+  }
+
+  /* Sidebar */
+  aside.sidebar {
+    flex: 1.15;
+    background: white;
+    padding: 2rem 1.8rem;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    height: fit-content;
+  }
+  aside.sidebar h3 {
+    color: #003f6b;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    border-bottom: 2px solid #0077cc;
+    padding-bottom: 0.3rem;
+    letter-spacing: 0.05em;
+  }
+  .sidebar-section {
+    margin-bottom: 2.5rem;
+  }
+  .sidebar-section ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .sidebar-section ul li {
+    margin-bottom: 1rem;
+  }
+  .sidebar-section ul li a {
+    font-weight: 600;
+    color: #00509e;
+    font-size: 1rem;
+  }
+  .sidebar-section ul li a:hover {
+    color: #003f6b;
+  }
+  /* Tag cloud */
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .tag-cloud a {
+    background: #e1f0ff;
+    color: #004a8f;
+    padding: 0.35rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .tag-cloud a:hover {
+    background: #003f6b;
+    color: #e1f0ff;
+  }
+
+  /* Newsletter */
+  form.newsletter-form {
+    display: flex;
+    flex-direction: column;
+  }
+  form.newsletter-form label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #003f6b;
+  }
+  form.newsletter-form input[type="email"] {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1.8px solid #c4d9f8;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  form.newsletter-form input[type="email"]:focus {
+    border-color: #003f6b;
+    outline: none;
+  }
+  form.newsletter-form button {
+    background-color: #003f6b;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  form.newsletter-form button:hover {
+    background-color: #00509e;
+  }
+
+  /* Author bio */
+  section.author-bio {
+    background: white;
+    margin: 3rem 0 4rem;
+    padding: 2rem;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+    display: flex;
+    gap: 1.8rem;
+    align-items: center;
+  }
+  section.author-bio img {
+    border-radius: 50%;
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  }
+  section.author-bio div {
+    flex: 1;
+  }
+  section.author-bio h3 {
+    margin: 0 0 0.4rem;
+    color: #003f6b;
+  }
+  section.author-bio p {
+    font-size: 1.05rem;
+    color: #444;
+  }
+
+  /* Featured research and events */
+  section.featured-research, section.upcoming-events {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 2rem 2.5rem;
+    margin-bottom: 3rem;
+  }
+  section.featured-research h3, section.upcoming-events h3 {
+    margin-top: 0;
+    color: #003f6b;
+    border-bottom: 3px solid #0077cc;
+    padding-bottom: 0.5rem;
+  }
+  section.featured-research ul, section.upcoming-events ul {
+    padding-left: 1.2rem;
+    margin-top: 1rem;
+  }
+  section.featured-research ul li, section.upcoming-events ul li {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+  section.featured-research ul li strong, section.upcoming-events ul li strong {
+    color: #00509e;
+  }
+
+  /* Footer */
+  footer {
+    background-color: #003f6b;
+    color: white;
+    padding: 3rem 1rem;
+    text-align: center;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+  footer p {
+    margin: 0.5rem 0;
+  }
+  footer a {
+    color: #82b1ff;
+    margin: 0 0.4rem;
+    font-size: 1.6rem;
+    transition: color 0.3s ease;
+  }
+  footer a:hover {
+    color: #bbdefb;
+  }
+
+  /* Responsive */
+  @media (max-width: 950px) {
+    main.blog-layout {
+      flex-direction: column;
+    }
+    aside.sidebar {
+      margin-top: 2rem;
+      width: 100%;
+    }
+  }
+  @media (max-width: 480px) {
+    header h1 {
+      font-size: 1.4rem;
+    }
+    article.post h2 {
+      font-size: 1.5rem;
+    }
+    section.author-bio {
+      flex-direction: column;
+      text-align: center;
+    }
+    section.author-bio img {
+      width: 90px;
+      height: 90px;
+      margin-bottom: 1rem;
+    }
+  }
+
+  /* Accessibility */
+  .visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo">Kakwara<span style="color:#82b1ff;">Hospital</span></div>
+    <nav aria-label="Primary navigation">
+      <a href={~p"/main"}>Home</a>
+      <a href="#categories">Categories</a>
+      <a href="#featured-research">Research</a>
+      <a href="#events">Events</a>
+      <a href={~p"/contact"}>Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="blog-layout container" role="main">
+
+  <!-- Posts Section -->
+  <section class="posts" id="posts" aria-label="Latest blog posts">
+
+    <!-- Featured Post -->
+    <article class="featured-post" aria-label="Featured article: Breakthrough in Oncology Treatment">
+      <h2>Breakthrough in Oncology Treatment at Kakwara Hospital</h2>
+      <p class="meta">By Dr. Clara Lee | June 5, 2025 | Category: Oncology</p>
+      <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=900&q=80" alt="Newborn baby care" />
+      <p class="excerpt">
+        Our oncology team has pioneered a new targeted therapy that significantly improves survival rates for certain cancers. This breakthrough offers hope to thousands of patients worldwide.
+      </p>
+      <a href="#" class="read-more">Read Full Story →</a>
+    </article>
+
+    <!-- Regular Posts -->
+    <article class="post" aria-label="Article: Advances in Cardiology">
+      <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=900&q=80" alt="Newborn baby care" />
+      <h2>Advances in Cardiology: What Patients Should Know</h2>
+      <p class="meta">By Dr. John Smith | June 1, 2025 | Category: Cardiology</p>
+      <p class="excerpt">
+        Kakwara Hospital’s cardiology department continues to push boundaries with new minimally invasive procedures, improving patient outcomes and recovery times.
+      </p>
+      <a href="#" class="read-more">Read More →</a>
+    </article>
+
+    <article class="post" aria-label="Article: Managing Diabetes">
+      <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=900&q=80" alt="Doctor consulting patient" />
+      <h2>Managing Diabetes: Tips from Our Experts</h2>
+      <p class="meta">By Dr. Emily Rose | May 25, 2025 | Category: Diabetes Care</p>
+      <p class="excerpt">
+        Diabetes management is a lifelong commitment. Our team at Kakwara Hospital shares essential tips for maintaining healthy blood sugar levels and preventing complications.
+      </p>
+      <a href="#" class="read-more">Read More →</a>
+    </article>
+
+    <article class="post" aria-label="Article: Neonatal Care Success Stories">
+      <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=900&q=80" alt="Newborn baby care" />
+      <h2>Neonatal Care Success Stories</h2>
+      <p class="meta">By Dr. Ahmed Khan | May 10, 2025 | Category: Neonatal Care</p>
+      <p class="excerpt">
+        Our neonatal unit at Kakwara Hospital has helped countless families welcome their newborns into the world with expert care and compassionate support.
+      </p>
+      <a href="#" class="read-more">Read More →</a>
+    </article>
+
+    <article class="post" aria-label="Article: Mental Health Awareness">
+      <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=900&q=80" alt="Newborn baby care" />
+      <h2>Mental Health Awareness and Support at Kakwara Hospital</h2>
+      <p class="meta">By Dr. Maria Gonzalez | April 20, 2025 | Category: Mental Health</p>
+      <p class="excerpt">
+        Raising awareness for mental health challenges is a priority. Learn about our counseling programs and how Kakwara Hospital supports emotional well-being.
+      </p>
+      <a href="#" class="read-more">Read More →</a>
+    </article>
+
+    <article class="post" aria-label="Article: COVID-19 Vaccination Update">
+      <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=900&q=80" alt="Newborn baby care" />
+      <h2>COVID-19 Vaccination Update and Safety Guidelines</h2>
+      <p class="meta">By Dr. Samuel Okafor | April 5, 2025 | Category: Public Health</p>
+      <p class="excerpt">
+        Stay informed on the latest COVID-19 vaccine availability, booster schedules, and hospital safety protocols to keep our community safe.
+      </p>
+      <a href="#" class="read-more">Read More →</a>
+    </article>
+
+  </section>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" role="complementary" aria-label="Sidebar with categories, popular posts, tags, newsletter">
+
+    <div class="sidebar-section" id="categories">
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="#">Oncology</a></li>
+        <li><a href="#">Cardiology</a></li>
+        <li><a href="#">Diabetes Care</a></li>
+        <li><a href="#">Neonatal Care</a></li>
+        <li><a href="#">Mental Health</a></li>
+        <li><a href="#">Public Health</a></li>
+        <li><a href="#">Hospital News</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section" aria-label="Popular posts">
+      <h3>Popular Posts</h3>
+      <ul>
+        <li><a href="#">Understanding Stroke Symptoms</a></li>
+        <li><a href="#">Tips for Healthy Living</a></li>
+        <li><a href="#">How to Prepare for Surgery</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section" aria-label="Tag cloud">
+      <h3>Tags</h3>
+      <div class="tag-cloud" role="list">
+        <a href="#" role="listitem">Vaccines</a>
+        <a href="#" role="listitem">Recovery</a>
+        <a href="#" role="listitem">Pediatrics</a>
+        <a href="#" role="listitem">Mental Health</a>
+        <a href="#" role="listitem">Surgery</a>
+        <a href="#" role="listitem">Diabetes</a>
+        <a href="#" role="listitem">Heart</a>
+        <a href="#" role="listitem">Cancer</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section" aria-label="Newsletter signup">
+      <h3>Subscribe to Newsletter</h3>
+      <form class="newsletter-form" aria-label="Subscribe to newsletter">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" placeholder="Your email address" required />
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+
+  </aside>
+</main>
+
+<!-- Author Bio -->
+<section class="author-bio" aria-label="Author biography">
+  <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=150&q=80" alt="Dr. Clara Lee profile photo" />
+  <div>
+    <h3>Dr. Clara Lee</h3>
+    <p>Oncology Specialist and Lead Researcher at Kakwara Hospital, Dr. Lee is dedicated to advancing cancer treatment through innovative research and compassionate patient care. With over 15 years of experience, she leads clinical trials and community health programs.</p>
+  </div>
+</section>
+
+<!-- Featured Research -->
+<section class="featured-research container" id="featured-research" aria-label="Featured research">
+  <h3>Featured Research</h3>
+  <ul>
+    <li><strong>Gene Therapy Innovations:</strong> Exploring novel gene editing techniques to treat rare genetic disorders.</li>
+    <li><strong>Cardiac Imaging Breakthroughs:</strong> Developing AI-driven diagnostics for earlier detection of heart diseases.</li>
+    <li><strong>Neonatal Care Improvements:</strong> Advanced incubator technologies that improve newborn survival rates.</li>
+  </ul>
+</section>
+
+<!-- Upcoming Events -->
+<section class="upcoming-events container" id="events" aria-label="Upcoming hospital events">
+  <h3>Upcoming Events</h3>
+  <ul>
+    <li><strong>June 15, 2025:</strong> Community Health Fair — Free screenings and wellness workshops.</li>
+    <li><strong>July 10, 2025:</strong> Webinar: Managing Chronic Diseases — Join our experts online.</li>
+    <li><strong>August 5, 2025:</strong> Blood Donation Drive — Help save lives, donate blood at Kakwara Hospital.</li>
+  </ul>
+</section>
+
+<!-- Footer -->
+<footer id="contact" role="contentinfo" aria-label="Contact information and social media">
+  <div class="container">
+    <p>Contact Kakwara Hospital Blog</p>
+    <p>Email: <a href="mailto:blog@kakwarahospital.org">blog@kakwarahospital.org</a> | Phone: +254743856988</p>
+    <p>123 Health St, Wellness City, Country</p>
+<div aria-label="Social media links">
+  <a href="https://www.facebook.com/kakwarahospital" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  <a href="https://www.twitter.com/kakwarahospital" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-twitter"></i>
+  </a>
+  <a href="https://www.instagram.com/kakwarahospital" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="https://www.linkedin.com/company/kakwarahospital" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-linkedin-in"></i>
+  </a>
+  <a href="https://www.youtube.com/kakwarahospital" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-youtube"></i>
+  </a>
+</div>
+
+<!-- Add Font Awesome CSS (paste in <head>) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <p>&copy; 2025 Kakwara Hospital. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
