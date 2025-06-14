@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: kakwara-hospital
+    env: elixir
+    plan: free
+    buildCommand: |
+      mix deps.get
+      mix ecto.create
+      mix ecto.migrate
+      mix assets.deploy
+      mix compile
+      mix release
+    startCommand: "_build/prod/rel/kakwara_hospital/bin/kakwara_hospital start"
+    envVars:
+      - key: DATABASE_PATH
+        value: /etc/kakwara_hospital/kakwara_hospital.db
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: PHX_HOST
+        value: kakwara-hospital.onrender.com
+      - key: PORT
+        value: 10000
+      - key: PHX_SERVER
+        value: true
