@@ -16,7 +16,7 @@ defmodule KakwaraHospitalWeb.Router do
 
   scope "/", KakwaraHospitalWeb do
     pipe_through :browser
-
+    get "/", PageController, :home
     get "/main", PageController, :main
     get "/about", PageController, :about
     get "/contact", PageController, :contact

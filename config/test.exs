@@ -1,14 +1,16 @@
 import Config
 
-# Configure your database
-#
-# The MIX_TEST_PARTITION environment variable can be used
-# to provide built-in test partitioning in CI environment.
-# Run `mix help test` for more information.
+# Configure your PostgreSQL database for testing
 config :kakwara_hospital, KakwaraHospital.Repo,
-  database: Path.expand("../kakwara_hospital_test.db", __DIR__),
+  username: "postgres",
+  password: "your_password", # 🔁 Replace with your actual PostgreSQL password
+  hostname: "localhost",
+  port: 5432,
+  database: "kakwara_hospital_test",
   pool_size: 5,
-  pool: Ecto.Adapters.SQL.Sandbox
+  pool: Ecto.Adapters.SQL.Sandbox,
+  stacktrace: true,
+  show_sensitive_data_on_connection_error: true
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.

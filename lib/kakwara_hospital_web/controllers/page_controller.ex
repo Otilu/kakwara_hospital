@@ -3,6 +3,9 @@ defmodule KakwaraHospitalWeb.PageController do
 
   # This module defines the PageController for handling requests to the main page.
   # It renders the main page without a layout.
+  def home(conn, _params) do
+    render(conn, :home, layout: false)
+  end
   def main(conn, _params) do
     render(conn, :main, layout: false)
   end

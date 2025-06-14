@@ -1,0 +1,146 @@
+<!-- lib/kakwara_hospital_web/templates/page/home.html.heex -->
+<div class="website-container">
+  <style>
+    /* Embedded CSS */
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --text: #1f2937;
+      --light: #f9fafb;
+      --gray: #e5e7eb;
+    }
+    
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.5;
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      background-color: var(--light);
+    }
+    
+    .website-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    
+    nav {
+      background-color: var(--primary-dark);
+      padding: 1rem;
+    }
+    
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    
+    nav a:hover {
+      opacity: 0.8;
+    }
+    
+    main {
+      flex: 1;
+      padding: 2rem 1rem;
+    }
+    
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    
+    .card:hover {
+      transform: translateY(-4px);
+    }
+    
+    .card-content {
+      padding: 1.5rem;
+    }
+    
+    footer {
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+    }
+  </style>
+
+  <!-- HTML Content -->
+  <header>
+    <h1 class="text-4xl font-bold">Kakwara Hospital</h1>
+    <p class="text-xl mt-2">Compassionate Healthcare Services</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="services">
+      <h2 class="text-2xl font-semibold">Our Medical Services</h2>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-content">
+            <h3 class="text-xl font-medium">Emergency Care</h3>
+            <p class="mt-2">24/7 emergency medical services with our expert team.</p>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-content">
+            <h3 class="text-xl font-medium">General Medicine</h3>
+            <p class="mt-2">Comprehensive healthcare for all ages and conditions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Kakwara Hospital. All rights reserved.</p>
+    <p class="mt-2">Contact: info@kakwarahospital.com | Phone: (123) 456-7890</p>
+  </footer>
+</div>

@@ -1,9 +1,3 @@
-# This file is responsible for configuring your application
-# and its dependencies with the aid of the Config module.
-#
-# This configuration file is loaded before any dependency and
-# is restricted to this project.
-
 import Config
 
 # General application configuration
@@ -22,9 +16,10 @@ config :kakwara_hospital, KakwaraHospitalWeb.Endpoint,
   pubsub_server: KakwaraHospital.PubSub,
   live_view: [signing_salt: "m1zr4fHo"]
 
+# Enable endpoint serving in releases
+config :phoenix, :serve_endpoints, true
+
 # Configures the mailer
-#
-# Uses Local adapter for dev/test. For production, set in `runtime.exs`.
 config :kakwara_hospital, KakwaraHospital.Mailer,
   adapter: Swoosh.Adapters.Local
 
@@ -56,6 +51,9 @@ config :phoenix, :json_library, Jason
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
+
+# Optional timezone DB config
+# config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 
 # Import environment-specific config
 import_config "#{config_env()}.exs"
