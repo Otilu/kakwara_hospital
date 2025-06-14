@@ -27,7 +27,7 @@ services:
       - key: PHX_HOST
         value: kakwara-hospital.onrender.com
       - key: PORT
-        value: 10000
+        value: 4002
       - key: PHX_SERVER
         value: true
       - key: POOL_SIZE
