@@ -9,13 +9,18 @@ services:
       MIX_ENV=prod mix deps.get &&
       mix compile &&
       mix assets.deploy &&
+      mkdir -p /tmp/kakwara_data &&  # Ensure directory exists
+      touch /tmp/kakwara_hospital.db &&  # Create database file
+      chmod 644 /tmp/kakwara_hospital.db &&  # Set permissions
       mix release
 
-    startCommand: _build/prod/rel/kakwara_hospital/bin/kakwara_hospital start
+    startCommand: >
+      _build/prod/rel/kakwara_hospital/bin/kakwara_hospital eval "KakwaraHospital.Release.migrate" &&
+      _build/prod/rel/kakwara_hospital/bin/kakwara_hospital start
 
     envVars:
       - key: DATABASE_PATH
-        value: /tmp/kakwara_hospital.db  # Changed to /tmp for write permissions
+        value: /tmp/kakwara_hospital.db
 
       - key: SECRET_KEY_BASE
         generateValue: true
@@ -26,13 +31,9 @@ services:
       - key: PORT
         value: 10000
 
-      - key: PHX_SERVER
-        value: true
-
-      # Add these new variables
       - key: MIX_ENV
         value: prod
-        
+
       - key: POOL_SIZE
         value: "5"
 
