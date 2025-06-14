@@ -4,38 +4,34 @@ services:
     runtime: elixir
     repo: https://github.com/Otilu/kakwara_hospital
     branch: main
-
-    buildCommand: >
+    buildCommand: |
+      mix local.rebar --force &&
+      mix local.hex --force &&
       MIX_ENV=prod mix deps.get &&
       mix compile &&
       mix assets.deploy &&
-      mkdir -p /tmp/kakwara_data &&  # Ensure directory exists
-      touch /tmp/kakwara_hospital.db &&  # Create database file
-      chmod 644 /tmp/kakwara_hospital.db &&  # Set permissions
+      mkdir -p /tmp/kakwara_data &&
+      touch /tmp/kakwara_hospital.db &&
+      chmod 644 /tmp/kakwara_hospital.db &&
       mix release
-
-    startCommand: >
+    startCommand: |
       _build/prod/rel/kakwara_hospital/bin/kakwara_hospital eval "KakwaraHospital.Release.migrate" &&
       _build/prod/rel/kakwara_hospital/bin/kakwara_hospital start
-
     envVars:
-      - key: DATABASE_PATH
-        value: /tmp/kakwara_hospital.db
-
-      - key: SECRET_KEY_BASE
-        generateValue: true
-
-      - key: PHX_HOST
-        value: kakwara-hospital.onrender.com
-
-      - key: PORT
-        value: 10000
-
       - key: MIX_ENV
         value: prod
-
+      - key: DATABASE_PATH
+        value: /tmp/kakwara_hospital.db
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: PHX_HOST
+        value: kakwara-hospital.onrender.com
+      - key: PORT
+        value: 10000
+      - key: PHX_SERVER
+        value: true
       - key: POOL_SIZE
         value: "5"
-
+    healthCheckPath: /health
     plan: free
     region: oregon
