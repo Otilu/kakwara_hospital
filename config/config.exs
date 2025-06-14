@@ -7,7 +7,7 @@ config :kakwara_hospital,
 
 # Configures the endpoint
 config :kakwara_hospital, KakwaraHospitalWeb.Endpoint,
-  url: [host: "localhost", port: 4002],
+  url: [host: "localhost", port: 5432],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
     formats: [html: KakwaraHospitalWeb.ErrorHTML, json: KakwaraHospitalWeb.ErrorJSON],
