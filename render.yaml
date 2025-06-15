@@ -25,9 +25,12 @@ services:
       - key: PHX_HOST
         value: kakwara-hospital.onrender.com
       - key: PORT
-        value: "10000" # Render sets this, but it's okay to declare it explicitly
+        value: "10000"  # optional but okay
+      - key: PHX_SERVER
+        value: true
       - key: POOL_SIZE
         value: "5"
     healthCheckPath: /health
     plan: free
     region: oregon
+    autoDeploy: true
