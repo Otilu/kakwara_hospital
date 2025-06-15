@@ -32,5 +32,4 @@ services:
         value: "5"
     healthCheckPath: /health
     plan: free
-    region: oregon
     autoDeploy: true
