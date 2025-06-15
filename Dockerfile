@@ -1,59 +1,45 @@
-# Base image with Elixir, Erlang, Node.js, and Hex/Rebar installed
-FROM hexpm/elixir:1.15.7-erlang-26.2.3-ubuntu-jammy as build
+# Base image with Elixir and Erlang
+FROM hexpm/elixir:1.15.7-erlang-26.2.3-alpine as build
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    npm \
-    curl \
-    git \
-    && apt-get clean
+# Install OS dependencies
+RUN apk add --no-cache build-base npm git
 
 # Set working directory
 WORKDIR /app
 
-# Set environment variables
+# Set environment
 ENV MIX_ENV=prod
 
-# Cache elixir deps
+# Install Hex and Rebar
+RUN mix local.hex --force && \
+    mix local.rebar --force
+
+# Cache deps
 COPY mix.exs mix.lock ./
 COPY config config
-RUN mix local.hex --force && \
-    mix local.rebar --force && \
-    mix deps.get --only prod
+RUN mix deps.get --only prod
 
-# Copy the rest of the app and compile
+# Copy source files
 COPY lib lib
 COPY priv priv
 COPY assets assets
+
+# Build and compile assets
 RUN mix assets.deploy && \
-    mix compile
+    mix compile && \
+    mix release
 
-# Build release
-RUN mix release
-
-# ------------------------
 # Runtime stage
-# ------------------------
-FROM debian:bullseye-slim AS app
+FROM alpine:3.18 AS app
 
-# Install runtime dependencies
-RUN apt-get update && apt-get install -y \
-    libssl-dev \
-    ncurses-bin \
-    && apt-get clean
+RUN apk add --no-cache libssl1.1 ncurses
 
 WORKDIR /app
-
-# Copy release from build stage
 COPY --from=build /app/_build/prod/rel/kakwara_hospital ./
 
-# Set environment variables
-ENV MIX_ENV=prod \
-    HOME=/app \
-    PORT=10000
+ENV HOME=/app
+ENV MIX_ENV=prod
+ENV PORT=10000
 
 EXPOSE 10000
-
-# Start app
 CMD ["bin/kakwara_hospital", "start"]
