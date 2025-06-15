@@ -1,7 +1,7 @@
 import Config
 
 if config_env() == :prod do
-  # Database configuration
+  # Database
   database_url =
     System.get_env("DATABASE_URL") ||
       raise """
@@ -15,7 +15,7 @@ if config_env() == :prod do
     ssl: true,
     socket_options: [:inet6]
 
-  # Endpoint configuration
+  # Endpoint
   secret_key_base =
     System.get_env("SECRET_KEY_BASE") ||
       raise "environment variable SECRET_KEY_BASE is missing."
@@ -34,9 +34,14 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base,
     server: true,
-    check_origin: ["https://#{host}"]
+    check_origin: ["https://#{host}", "http://#{host}"]
 
+  # Optional clustering or discovery
   config :kakwara_hospital, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
+  # Logger (recommended for production)
+  config :logger, level: :info
+
+  # Required for endpoint serving
   config :phoenix, :serve_endpoints, true
 end
