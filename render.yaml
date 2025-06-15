@@ -1,8 +1,18 @@
 services:
   - type: web
     name: kakwara_hospital
+    runtime: elixir
     repo: https://github.com/Otilu/kakwara_hospital
     branch: main
+    buildCommand: |
+      mix local.rebar --force &&
+      mix local.hex --force &&
+      MIX_ENV=prod mix deps.get &&
+      MIX_ENV=prod mix assets.deploy &&
+      MIX_ENV=prod mix release
+    startCommand: |
+      _build/prod/rel/kakwara_hospital/bin/kakwara_hospital eval "KakwaraHospital.Release.migrate" &&
+      _build/prod/rel/kakwara_hospital/bin/kakwara_hospital start
     envVars:
       - key: DATABASE_URL
         fromDatabase:
