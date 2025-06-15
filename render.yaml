@@ -2,8 +2,6 @@ services:
   - type: web
     name: kakwara_hospital
     runtime: elixir
-    repo: https://github.com/Otilu/kakwara_hospital
-    branch: main
     buildCommand: |
       mix local.rebar --force &&
       mix local.hex --force &&
@@ -32,4 +30,9 @@ services:
         value: "5"
     healthCheckPath: /health
     plan: free
-    autoDeploy: true
+
+databases:
+  - name: kakwara-db
+    plan: free
+    databaseName: kakwara_prod
+    user: kakwara_user
