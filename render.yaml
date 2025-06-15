@@ -8,31 +8,24 @@ services:
       mix local.rebar --force &&
       mix local.hex --force &&
       MIX_ENV=prod mix deps.get &&
-      mix compile &&
-      mix assets.deploy &&
-      mkdir -p /tmp/kakwara_data &&
-      touch /tmp/kakwara_hospital.db &&
-      chmod 644 /tmp/kakwara_hospital.db &&
-      mix release
+      MIX_ENV=prod mix assets.deploy &&
+      MIX_ENV=prod mix release
     startCommand: |
       _build/prod/rel/kakwara_hospital/bin/kakwara_hospital eval "KakwaraHospital.Release.migrate" &&
       _build/prod/rel/kakwara_hospital/bin/kakwara_hospital start
     envVars:
       - key: MIX_ENV
         value: prod
-      - key: DATABASE_PATH
-        value: /tmp/kakwara_hospital.db
+      - key: DATABASE_URL
+        fromDatabase:
+          name: kakwara-db
+          property: connectionString
       - key: SECRET_KEY_BASE
         generateValue: true
       - key: PHX_HOST
         value: kakwara-hospital.onrender.com
       - key: PORT
-        value: 5432
-      - key: PHX_PORT
-        value: "5432"
-      - key: PHX_ROOT
-      - key: PHX_SERVER
-        value: true
+        value: "10000" # Render sets this, but it's okay to declare it explicitly
       - key: POOL_SIZE
         value: "5"
     healthCheckPath: /health
