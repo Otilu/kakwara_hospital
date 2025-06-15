@@ -1,21 +1,9 @@
 services:
   - type: web
     name: kakwara_hospital
-    runtime: elixir
     repo: https://github.com/Otilu/kakwara_hospital
     branch: main
-    buildCommand: |
-      mix local.rebar --force &&
-      mix local.hex --force &&
-      MIX_ENV=prod mix deps.get &&
-      MIX_ENV=prod mix assets.deploy &&
-      MIX_ENV=prod mix release
-    startCommand: |
-      _build/prod/rel/kakwara_hospital/bin/kakwara_hospital eval "KakwaraHospital.Release.migrate" &&
-      _build/prod/rel/kakwara_hospital/bin/kakwara_hospital start
     envVars:
-      - key: MIX_ENV
-        value: prod
       - key: DATABASE_URL
         fromDatabase:
           name: kakwara-db
@@ -25,7 +13,9 @@ services:
       - key: PHX_HOST
         value: kakwara-hospital.onrender.com
       - key: PORT
-        value: "10000"  # optional but okay
+        value: "10000"
+      - key: MIX_ENV
+        value: prod
       - key: PHX_SERVER
         value: true
       - key: POOL_SIZE
