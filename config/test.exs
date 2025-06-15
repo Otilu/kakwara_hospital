@@ -3,7 +3,7 @@ import Config
 # Configure your PostgreSQL database for testing
 config :kakwara_hospital, KakwaraHospital.Repo,
   username: "postgres",
-  password: "your_password", # 🔁 Replace with your actual PostgreSQL password
+  password: "postgres", # 🔁 Replace with your actual PostgreSQL password
   hostname: "localhost",
   port: 5432,
   database: "kakwara_hospital_test",

@@ -5,7 +5,7 @@ config :kakwara_hospital, KakwaraHospital.Repo,
   username: "postgres",
   password: "postgres", # 🔁 Replace with your actual PostgreSQL password
   hostname: "localhost",
-  port: 4002,
+  port: 5432,
   database: "kakwara_hospital_dev",
   pool_size: 40,
   stacktrace: true,
@@ -13,7 +13,8 @@ config :kakwara_hospital, KakwaraHospital.Repo,
 
 # Development server configuration
 config :kakwara_hospital, KakwaraHospitalWeb.Endpoint,
-  http: [ip: {127, 0, 0, 1}, port: 5432],
+  http: [ip: {127, 0, 0, 1}, port: 4000],
+   url: [host: "localhost", port: 4000],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
