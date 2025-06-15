@@ -1,38 +1,36 @@
-# Base image with Elixir and Erlang
-FROM hexpm/elixir:1.15.7-erlang-26.2.3-alpine as build
+# Base image with Elixir and Erlang installed
+FROM hexpm/elixir:1.15.7-erlang-26.2.3 as build
 
-# Install OS dependencies
-RUN apk add --no-cache build-base npm git
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+  build-essential \
+  npm \
+  git \
+  curl \
+  && apt-get clean
 
-# Set working directory
 WORKDIR /app
 
 # Set environment
 ENV MIX_ENV=prod
 
 # Install Hex and Rebar
-RUN mix local.hex --force && \
-    mix local.rebar --force
+RUN mix local.hex --force && mix local.rebar --force
 
-# Cache deps
+# Install dependencies
 COPY mix.exs mix.lock ./
 COPY config config
 RUN mix deps.get --only prod
 
-# Copy source files
+# Copy source and build
 COPY lib lib
 COPY priv priv
 COPY assets assets
+RUN mix assets.deploy && mix compile && mix release
 
-# Build and compile assets
-RUN mix assets.deploy && \
-    mix compile && \
-    mix release
-
-# Runtime stage
-FROM alpine:3.18 AS app
-
-RUN apk add --no-cache libssl1.1 ncurses
+# Runtime image
+FROM debian:bullseye-slim AS app
+RUN apt-get update && apt-get install -y libssl-dev ncurses-bin && apt-get clean
 
 WORKDIR /app
 COPY --from=build /app/_build/prod/rel/kakwara_hospital ./
