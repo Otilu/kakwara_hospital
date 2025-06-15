@@ -13,9 +13,7 @@ services:
       _build/prod/rel/kakwara_hospital/bin/kakwara_hospital start
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: kakwara-db
-          property: connectionString
+        value: "postgresql://kakwara_user:QPAZs3pR7XIqSBsfSJ2Yr9XSaVpoKhfh@dpg-d123qj3uibrs73eqaio0-a/kakwara_db"
       - key: SECRET_KEY_BASE
         generateValue: true
       - key: PHX_HOST
@@ -30,9 +28,5 @@ services:
         value: "5"
     healthCheckPath: /health
     plan: free
-
-databases:
-  - name: kakwara-db
-    plan: free
-    databaseName: kakwara_prod
-    user: kakwara_user
+    region: oregon
+    autoDeploy: true
